@@ -9,10 +9,10 @@ export const Navbar = ()=>{
     const [auth, setAuth] = useState(true)
     const [menu, setMenu] = useState(false)
 
-    return <div className="fixed top-1 mx-auto py-2 px-12 rounded-md w-full flex items-center justify-between bg-red-500">
+    return <div className="fixed top-1 mx-auto py-2 px-12 rounded-md w-full h-16 flex items-center justify-between bg-red-500">
 
         {/* logo */}
-        <div className="flex items-center gap-2 ">
+        <div className="flex items-center gap-2 cursor-pointer">
             <FaNoteSticky className="text-3xl"/>
             <p className="text-2xl font-black">Totoist</p>
         </div>
