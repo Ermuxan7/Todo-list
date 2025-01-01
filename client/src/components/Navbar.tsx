@@ -2,10 +2,12 @@ import { useState } from "react";
 import { FaNoteSticky } from "react-icons/fa6";
 import { IoMenu } from "react-icons/io5";
 import Button from "./ui/Button";
+import Menu from "./Menu";
 
 
 export const Navbar = ()=>{
     const [auth, setAuth] = useState(true)
+    const [menu, setMenu] = useState(false)
 
     return <div className="fixed top-1 mx-auto py-2 px-12 rounded-md w-full flex items-center justify-between bg-red-500">
 
@@ -27,7 +29,8 @@ export const Navbar = ()=>{
                 <>
                     {/* auth */}
                     <Button text='+add todo' />
-                    <IoMenu/>
+                    <IoMenu className='text-4xl cursor-pointer hover:text-gray-700' onClick={()=> setMenu(!menu)} />
+                    <Menu menu={menu} setMenu={setMenu}/>
                 </>
             )}
         </div>
