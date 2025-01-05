@@ -9,16 +9,16 @@ function App() {
     return(
     <div>
         {auth ? (
-                <div className='mx-10 h-screen'>
+                <div className='mx-10 h-screen '>
                     <div className='grid  lg:grid-cols-2 gap-x-6 gap-y-8 my-24'>
-                        <Card />            
-                        <Card />            
-                        <Card />            
+                        <Card />                    
                     </div>
                     <AddModal />    
                 </div>
             ):(
-                <h1>Please Registration</h1>
+                <>
+                <h1 className='mt-24'>Please Registration</h1>
+                </>
             )
         }
         </div>

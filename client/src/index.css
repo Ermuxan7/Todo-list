@@ -11,3 +11,20 @@
 body{
     overflow-x: hidden;
 }
+
+::-webkit-scrollbar{
+    width: 12px;
+}
+
+::-webkit-scrollbar-track{
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb{
+    background: rgba(224, 10, 53, 0.6);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background: rgba(146, 5, 33, 0.6);
+}
