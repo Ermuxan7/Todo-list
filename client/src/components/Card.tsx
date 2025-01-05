@@ -1,14 +1,14 @@
 import { useState } from "react";
 import Button from "./ui/Button";
-// import { FaRegEdit } from "react-icons/fa";
-// import { MdDelete } from "react-icons/md";
-// import { MdOutlineDownloadDone } from "react-icons/md"
+import { FaRegEdit } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
+import { MdOutlineDoneOutline } from "react-icons/md";
 import {ToastContainer, toast} from 'react-toastify'
 
 export default function Card() {
     const [done, setDone] = useState<boolean>(false)
 
-    const doneNotify = () => toast.success(!done ? 'Task is done!' : 'task no done', {
+    const doneNotify = () => toast.success((!done ? 'Task is done!' : 'task no done'), {
         autoClose: 2000,
     })
 
@@ -31,9 +31,9 @@ export default function Card() {
             </div>
             
             <div className="flex items-center gap-4 justify-end p-4">
-                <Button text='done' onClick={()=>{setDone(!done), doneNotify()} }/>
-                <Button text= 'edit'/>
-                <Button text='delete' onClick={() => {deleteNotify()}}/>
+                <Button text='done' icon={<MdOutlineDoneOutline />}  width="8" backgroundColor="#228B22" onClick={()=>{setDone(!done), doneNotify()} }/>
+                <Button text= 'edit' icon={<FaRegEdit />} width="8" backgroundColor='#317873'/>
+                <Button text='delete' icon={<MdDelete />} width="8" backgroundColor='indigo' onClick={() => {deleteNotify()}}/>
                 <ToastContainer />
             </div>
 

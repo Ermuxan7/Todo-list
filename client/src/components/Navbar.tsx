@@ -1,16 +1,19 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { FaNoteSticky } from "react-icons/fa6";
 import { IoMenu } from "react-icons/io5";
+import { CgProfile } from "react-icons/cg";
+import { MdLogout } from "react-icons/md";
 import Button from "./ui/Button";
 import Menu from "./Menu";
-import AddModal from "./ui/modal/AddModal";
+import useStore from "../store/store";
+import { Link } from "react-router-dom";
 
-
-export const Navbar = ()=>{
-    const [auth, setAuth] = useState<boolean>(true)
+export const Navbar: React.FC = ()=>{
+    const {add, setAdd, auth, setAuth} = useStore()
     const [menu, setMenu] = useState<boolean>(false)
-    const [add, setAdd] = useState<boolean>(false)
+    const [profile, setProfile] = useState(false)
 
+    
 
     return <div className="fixed top-1 mx-auto py-2 px-12 rounded-md w-full h-16 flex items-center justify-between bg-red-500">
 
@@ -25,16 +28,31 @@ export const Navbar = ()=>{
             {!auth ? (
                 <>
                     {/* no auth */}
-                    <Button text='Login' />
-                    <Button text='Register' />
+                    <Link to='/login'><Button text='Login' width="8" backgroundColor='#8806CE'/></Link>
+                    <Link to='/register'><Button text='Register' width="8" backgroundColor='#D99058'/></Link>
+                    
                 </>
             ):(
                 <>
                     {/* auth */}
-                    <Button text='+add todo' onClick={()=>setAdd(!add)}/>
+                    <Button text='+add todo' width="8" backgroundColor='#6F00FF' onClick={() =>setAdd(!add)}/>
+                    <button className="relative w-10 h-10 rounded-full flex items-center justify-center bg-gray-700/90 text-white">
+                        <p className=" cursor-pointer" onClick={()=> setProfile(!profile)}>av</p>
+                        {profile && (
+                            <ul className="absolute top-10 right-1 w-28 p-3 rounded-md shadow-md bg-gray-700/90 font-bolder text-gray-100 space-y-3">
+                                <li className="flex items-center justify-center gap-2 py-1 rounded-md hover:bg-gray-800/50">
+                                    <CgProfile className="text-lg"/>
+                                    Profile
+                                </li>
+                                <li className="flex items-center justify-center gap-1 py-1 rounded-md hover:bg-gray-800/50" onClick={() =>setAuth(!auth)}>
+                                    <MdLogout className="text-lg"/>
+                                    Logout
+                                </li>
+                            </ul>
+                        )}
+                    </button>
                     <IoMenu className='text-4xl cursor-pointer hover:text-gray-700' onClick={()=> setMenu(!menu)} />
                     <Menu menu={menu} setMenu={setMenu}/>
-                    {add && <AddModal />}
                 </>
             )}
         </div>
