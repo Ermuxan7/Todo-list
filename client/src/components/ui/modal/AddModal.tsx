@@ -1,11 +1,25 @@
+import { useState } from "react";
 import useStore from "../../../store/store";
 import Button from "../Button";
-
-
-
+import { postTodo } from "../../../api/api";
 
 export default function AddModal() {
-    const {add, setAdd} = useStore()
+    const {add, setAdd, todos, setTodos } = useStore()
+    const [text, setText] = useState("")
+    
+    const handleTodo = async () =>{
+        try {
+            const newTodo:any = {text}
+            const createdTodo = await postTodo(newTodo)
+            setTodos([...todos, createdTodo])
+            setAdd(false)
+            setText("")
+            
+        } catch (error) {
+            console.error("Error fetching todos:", error);
+        }
+    }
+
 
     if(!add) return null
 
@@ -13,7 +27,13 @@ export default function AddModal() {
         <button className="absolute right-16 top-6 flex items-center justify-center w-10 h-10 rounded-full text-3xl font-bold" onClick={() =>setAdd(false)}>x</button>
 
         <h2 className="text-xl font-bold">Add New Todo</h2>
-        <textarea placeholder="add text..." cols={30} rows={16} className="w-1/2 text-xl outline-none px-6 py-5 text-gray-200 rounded-md bg-gray-600"/>
-        <Button text='Add Todo' backgroundColor="blue" width="8" onClick={() =>setAdd(false)}/>
+        <textarea placeholder="add text..." 
+        cols={30} rows={16} 
+        className="w-1/2 text-xl outline-none px-6 py-5 text-gray-200 rounded-md bg-gray-600"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        />
+        
+        <Button text='Add Todo' backgroundColor="blue" width="8" onClick={handleTodo}/>
     </div>;
 }

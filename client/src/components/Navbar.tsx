@@ -35,7 +35,9 @@ export const Navbar: React.FC = ()=>{
             ):(
                 <>
                     {/* auth */}
-                    <Button text='+add todo' width="8" backgroundColor='#6F00FF' onClick={() =>setAdd(!add)}/>
+                    <div className="hidden sm:block">
+                        <Button text='+add todo' width="8" backgroundColor='#6F00FF' onClick={() =>setAdd(!add)}/>
+                    </div>
                     <button className="relative w-10 h-10 rounded-full flex items-center justify-center bg-gray-700/90 text-white">
                         <p className=" cursor-pointer" onClick={()=> setProfile(!profile)}>av</p>
                         {profile && (

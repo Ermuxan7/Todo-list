@@ -10,7 +10,7 @@ function App() {
     <div>
         {auth ? (
                 <div className='mx-10 h-screen '>
-                    <div className='grid  lg:grid-cols-2 gap-x-6 gap-y-8 my-24'>
+                    <div className='my-24'>
                         <Card />                    
                     </div>
                     <AddModal />    
