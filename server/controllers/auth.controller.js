@@ -1,4 +1,6 @@
-const { GetAllUsers, RegisterUser, LoginUser } = require('../services/auth.service.js')
+import { GetAllUsers, RegisterUser, LoginUser } from '../services/auth.service.js'
+import generateToken from '../lib/utils.js'
+
 
 // get all users 
 const getAllUsers = async (req, res) =>{
@@ -26,11 +28,15 @@ const registerUser = async (req, res) =>{
         }
         
         const user = await RegisterUser({username, email, password})
-        
-        res.status(200).json({
-            message: 'success',
-            user
-        })
+
+        if(user){
+            generateToken(existingUser._id, res)
+
+            res.status(200).json({
+                message: 'success',
+                user
+            })
+        }
 
     } catch (error) {
         res.status(500).json({
@@ -51,11 +57,13 @@ const loginUser = async (req, res) =>{
         
         const user = await LoginUser({email, password})
 
-        res.status(200).json({
-            user
-        })
+        if(user){
+            generateToken(user.id, res)
+            res.status(200).json({
+                user
+            })
+        }
 
-        
     } catch (error) {
         res.status(500).json({
             message: 'Error',
@@ -64,8 +72,29 @@ const loginUser = async (req, res) =>{
     }
 }
 
-module.exports = {
+const logout = async (req, res) =>{
+    try {
+        const token = res.clearCookie('token')
+        res.status(200).json({message: 'User succesfully log out'})
+    } catch (error) {
+        console.log('Error logout controller', error);
+        res.status(500).json('Internal server error')
+    }
+}
+
+const checkAuth = async (req, res) =>{
+    try {
+        res.status(200).json('User authenticated succesfully')
+    } catch (error) {
+        console.log('Error checkAuth contoller', error);
+        res.status(500).json({msg: 'Internal server error'})
+    }
+}
+
+export {
     getAllUsers,
     registerUser,
-    loginUser
+    loginUser,
+    logout,
+    checkAuth
 };

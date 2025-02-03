@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose')
+import { Schema, model } from 'mongoose'
 
 const userSchema = new Schema({
     username: {
@@ -18,8 +18,10 @@ const userSchema = new Schema({
     },
     avatar: {
         type: String,
-        default: ''
+        default: 'example.png'
     }
 }, {timestamps: true})
 
-module.exports = model('User', userSchema)
+const User = model('User', userSchema)
+
+export default User

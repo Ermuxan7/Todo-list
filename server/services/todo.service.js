@@ -1,4 +1,4 @@
-const Todo = require('../models/todo.model')
+import Todo from '../models/todo.model.js'
 
 // get all todo
 const GetAllToto = async () =>{
@@ -40,7 +40,7 @@ const UpdateTodo = async ({ id, text, status }) =>{
     return updateTodo
 }
 
-module.exports = {
+export {
     GetAllToto,
     CreateTodo,
     UpdateTodo

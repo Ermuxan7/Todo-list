@@ -1,6 +1,7 @@
-const User = require('../models/user.model.js')
-const hashPassword = require('../helpers/hashPassword.js')
-const bcrypt = require('bcrypt')
+import User from '../models/user.model.js'
+import generateToken from '../lib/utils.js'
+import hashPassword from'../helpers/hashPassword.js'
+import bcrypt from 'bcrypt'
 
 // Get all users
 const GetAllUsers = async () =>{
@@ -31,8 +32,11 @@ const RegisterUser = async ({username, email, password}) =>{
         password: hashedPassword
     })
 
+
     await user.save()
     return user
+    
+
 }
 
 // Login a user
@@ -49,12 +53,10 @@ const LoginUser = async ({email, password}) =>{
         throw new Error('Invalid credentials')
     }
 
-    return {
-        message: 'login succesfully',
-    }
+    return user
 }
 
-module.exports = {
+export {
     GetAllUsers,
     RegisterUser,
     LoginUser

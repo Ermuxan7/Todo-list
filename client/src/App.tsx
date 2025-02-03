@@ -16,9 +16,9 @@ function App() {
                     <AddModal />    
                 </div>
             ):(
-                <>
-                <h1 className='mt-24'>Please Registration</h1>
-                </>
+                <div className='flex items-center justify-center h-screen text-6xl font-bold'>
+                    <h1 className='mt-24'>Please Registration</h1>
+                </div>
             )
         }
         </div>

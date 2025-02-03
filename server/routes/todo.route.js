@@ -1,14 +1,15 @@
-const { Router } = require('express')
-const { getAllTodo, createTodo, updateTodo, deleteTodo } = require('../controllers/todo.controller')
+import { Router } from 'express'
+import { getAllTodo, createTodo, updateTodo, deleteTodo } from '../controllers/todo.controller.js'
+import protectRoute from '../middleware/auth.middleware.js'
 
 const router = Router()
 
-router.get('/', getAllTodo)
+router.get('/', protectRoute, getAllTodo)
 
-router.post('/create', createTodo)
+router.post('/create', protectRoute, createTodo)
 
-router.put('/:id', updateTodo)
+router.put('/:id', protectRoute, updateTodo)
 
-router.delete('/:id', deleteTodo)
+router.delete('/:id', protectRoute, deleteTodo)
 
-module.exports = router
+export default router

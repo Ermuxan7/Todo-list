@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose')
+import { Schema, model } from 'mongoose'
 
 const todoSchema = new Schema({
     text: {
@@ -12,4 +12,6 @@ const todoSchema = new Schema({
     
 }, {timestamps: true})
 
-module.exports = model('Todo', todoSchema)
+const Todo = model('Todo', todoSchema)
+
+export default Todo

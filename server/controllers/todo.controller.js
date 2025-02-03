@@ -1,5 +1,5 @@
-const Todo = require('../models/todo.model')
-const { GetAllToto, CreateTodo, UpdateTodo } = require('../services/todo.service')
+import Todo from '../models/todo.model.js'
+import { GetAllToto, CreateTodo, UpdateTodo } from '../services/todo.service.js'
 
 const getAllTodo = async (req, res) =>{
     try {
@@ -85,7 +85,7 @@ const deleteTodo = async (req, res) =>{
     }
 }
 
-module.exports = {
+export {
     getAllTodo,
     createTodo,
     updateTodo,
